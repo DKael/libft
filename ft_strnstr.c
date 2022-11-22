@@ -9,32 +9,35 @@
 /*   Updated: 2022/11/21 16:32:13 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <stddef.h>
 
-char	*ft_strstr(char *str, char *to_find);
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 
-char	*ft_strstr(char *str, char *to_find)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	int	str_index;
-	int	find_index;
+	size_t	idx;
+	size_t	haystack_idx;
+	size_t	needle_idx;
 
-	if (to_find[0] == '\0')
-		return (str);
-	str_index = 0;
-	while (str[str_index] != '\0')
+	if (needle[0] == '\0')
+		return ((char *)haystack);
+	haystack_idx = 0;
+	while (haystack[haystack_idx] != '\0' && haystack_idx < len)
 	{
-		if (str[str_index] == to_find[0])
+		if (haystack[haystack_idx] == needle[0])
 		{
-			find_index = 1;
-			while (to_find[find_index] != '\0')
+			needle_idx = 1;
+			while (needle[needle_idx] != '\0')
 			{
-				if (str[str_index + find_index] != to_find[find_index])
+				if (haystack[haystack_idx + needle_idx] != needle[needle_idx]
+					|| !(haystack_idx + needle_idx < len))
 					break ;
-				find_index++;
+				needle_idx++;
 			}
-			if (to_find[find_index] == '\0')
-				return (&str[str_index]);
+			if (needle[needle_idx] == '\0')
+				return ((char *)&haystack[haystack_idx]);
 		}
-		str_index++;
+		haystack_idx++;
 	}
 	return (0);
 }

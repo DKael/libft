@@ -9,17 +9,11 @@
 /*   Updated: 2022/11/21 16:31:05 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+int	ft_toupper(int c);
 
-char	*ft_strupcase(char *str)
+int	ft_toupper(int c)
 {
-	int	index;
-
-	index = 0;
-	while (str[index] != '\0')
-	{
-		if ('a' <= str[index] && str[index] <= 'z')
-			str[index] -= 32;
-		index++;
-	}
-	return (str);
+	if ('a' <= c && c <= 'z')
+		c -= 32;
+	return (c);
 }

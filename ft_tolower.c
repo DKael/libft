@@ -9,17 +9,11 @@
 /*   Updated: 2022/11/21 16:31:15 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+int	ft_tolower(int c);
 
-char	*ft_strlowcase(char *str)
+int	ft_tolower(int c)
 {
-	int	index;
-
-	index = 0;
-	while (str[index] != '\0')
-	{
-		if ('A' <= str[index] && str[index] <= 'Z')
-			str[index] += 32;
-		index++;
-	}
-	return (str);
+	if ('A' <= c && c <= 'Z')
+		c += 32;
+	return (c);
 }
