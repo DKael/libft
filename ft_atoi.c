@@ -9,26 +9,34 @@
 /*   Updated: 2022/11/21 16:32:24 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <limits.h>
 
 int	ft_atoi(const char *str);
 
 int	ft_atoi(const char *str)
 {
-	int	index;
-	int	sign;
-	int	number;
+	int			idx;
+	int			sign;
+	long long	nb;
 
-	index = 0;
+	idx = 0;
 	sign = 1;
-	number = 0;
-	while ((9 <= str[index] && str[index] <= 13) || str[index] == ' ')
-		index++;
-	if (str[index] == '-')
+	nb = 0;
+	while ((9 <= str[idx] && str[idx] <= 13) || str[idx] == ' ')
+		idx++;
+	if (str[idx] == '-' || str[idx] == '+')
+		if (str[idx++] == '-')
+			sign = -1;
+	while ('0' <= str[idx] && str[idx] <= '9')
 	{
-		sign = -1;
-		index++;
+		if (nb > LLONG_MAX / 10 || (nb == LLONG_MAX / 10 && str[idx] - '0' > 7))
+		{
+			if (sign == 1)
+				return (-1);
+			else
+				return (0);
+		}
+		nb = nb * 10 + (str[idx++] - '0');
 	}
-	while ('0' <= str[index] && str[index] <= '9')
-		number = number * 10 + (str[index++] - '0');
-	return (number * sign);
+	return ((int)nb * sign);
 }

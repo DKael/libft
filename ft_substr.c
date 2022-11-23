@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungdki <hyungdki@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/21 16:32:34 by hyungdki          #+#    #+#             */
-/*   Updated: 2022/11/21 16:32:35 by hyungdki         ###   ########.fr       */
+/*   Created: 2022/11/23 15:25:48 by hyungdki          #+#    #+#             */
+/*   Updated: 2022/11/23 15:25:50 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stddef.h>
 #include <stdlib.h>
 
-void	*calloc(size_t count, size_t size);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 
-void	*calloc(size_t count, size_t size)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	index;
-	size_t	total_size;
-	void	*result;
-	char	*temp_ptr;
+	char	*result;
+	size_t	idx;
 
-	index = 0;
-	total_size = count * size;
-	result = malloc(total_size);
+	result = (char *)malloc(sizeof(char) * (len + 1));
 	if (result == 0)
 		return (0);
-	temp_ptr = (char *)result;
-	while (index < total_size)
+	idx = 0;
+	while (idx < len && s[(size_t)start + idx] != '\0')
 	{
-		temp_ptr[index] = 0;
-		index++;
+		result[idx] = s[(size_t)start + idx];
+		idx++;
 	}
+	result[idx] = '\0';
 	return (result);
 }
