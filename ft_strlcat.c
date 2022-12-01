@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include <stddef.h>
 
-static size_t	strlen(const char *s);
+static size_t	ft_strlen(const char *s);
 
 size_t	ft_strlcat(char *restrict dst, const char *restrict src, size_t dstsize)
 {
@@ -40,7 +40,7 @@ size_t	ft_strlcat(char *restrict dst, const char *restrict src, size_t dstsize)
 		return (dest_lenght + src_length);
 }
 
-static size_t	strlen(const char *s)
+static size_t	ft_strlen(const char *s)
 {
 	size_t	index;
 

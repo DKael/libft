@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 #include <stdlib.h>
 
-char	*ft_strtrim(char const *s1, char const *set);
-char	*do_trim(char const *s1, char const *set, char *result);
-int		ft_strlen_trim(char const *str);
+char			*ft_strtrim(char const *s1, char const *set);
+static char		*do_trim(char const *s1, char const *set, char *result);
+static int		ft_strlen_trim(char const *str);
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
@@ -39,7 +39,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	return (do_trim(s1, set, result));
 }
 
-char	*do_trim(char const *s1, char const *set, char *result)
+static char	*do_trim(char const *s1, char const *set, char *result)
 {
 	int		index_s1;
 	int		index_set;
@@ -67,7 +67,7 @@ char	*do_trim(char const *s1, char const *set, char *result)
 	return (result);
 }
 
-int	ft_strlen_trim(char const *str)
+static int	ft_strlen_trim(char const *str)
 {
 	int		index;
 

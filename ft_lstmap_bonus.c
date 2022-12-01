@@ -12,6 +12,26 @@
 #include <stdlib.h>
 #include "libft.h"
 
+static t_list	*free_node(t_list **lst, void (*del)(void *))
+{
+	t_list	*delete;
+	t_list	*next_node;
+
+	if ((*lst) != 0)
+	{
+		next_node = (*lst);
+		while (next_node->next != 0)
+		{
+			delete = next_node;
+			next_node = next_node->next;
+			del(delete->content);
+			free(delete);
+		}
+		free(next_node);
+	}
+	return (0);
+}
+
 static t_list	*do_map(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*ptr_node;
@@ -33,26 +53,6 @@ static t_list	*do_map(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		free(delete);
 	}
 	return (lst);
-}
-
-static t_list	*free_node(t_list **lst, void (*del)(void *))
-{
-	t_list	*delete;
-	t_list	*next_node;
-
-	if ((*lst) != 0)
-	{
-		next_node = (*lst);
-		while (next_node->next != 0)
-		{
-			delete = next_node;
-			next_node = next_node->next;
-			del(delete->content);
-			free(delete);
-		}
-		free(next_node);
-	}
-	return (0);
 }
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
