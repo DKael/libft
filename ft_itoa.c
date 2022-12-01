@@ -11,10 +11,10 @@
 /* ************************************************************************** */
 #include <stdlib.h>
 
-char	*ft_itoa(int n);
-char	*case_zero();
-char	*case_pos(int n, int digit);
-char	*case_neg(int n, int digit);
+char		*ft_itoa(int n);
+static char	*case_zero(void);
+static char	*case_pos(int n, int digit);
+static char	*case_neg(int n, int digit);
 
 char	*ft_itoa(int n)
 {
@@ -36,7 +36,7 @@ char	*ft_itoa(int n)
 		return (case_neg(n, digit));
 }
 
-char	*case_zero()
+static char	*case_zero(void)
 {
 	char	*result;
 
@@ -48,7 +48,7 @@ char	*case_zero()
 	return (result);
 }
 
-char	*case_pos(int n, int digit)
+static char	*case_pos(int n, int digit)
 {
 	char	*result;
 
@@ -56,7 +56,7 @@ char	*case_pos(int n, int digit)
 	if (result == 0)
 		return (0);
 	result[digit--] = '\0';
-	while(n != 0)
+	while (n != 0)
 	{
 		result[digit--] = (n % 10) + '0';
 		n /= 10;
@@ -64,7 +64,7 @@ char	*case_pos(int n, int digit)
 	return (result);
 }
 
-char	*case_neg(int n, int digit)
+static char	*case_neg(int n, int digit)
 {
 	char	*result;
 
@@ -73,7 +73,7 @@ char	*case_neg(int n, int digit)
 		return (0);
 	result[0] = '-';
 	result[digit + 1] = '\0';
-	while(n != 0)
+	while (n != 0)
 	{
 		result[digit--] = (-1) * (n % 10) + '0';
 		n /= 10;

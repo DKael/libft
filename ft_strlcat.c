@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include <stddef.h>
-unsigned int	ft_strlcat(char * restrict dst, const char * restrict src, size_t dstsize);
-int				ft_strlen(char *str);
 
-unsigned int	ft_strlcat(char * restrict dst, const char * restrict src, size_t dstsize)
+unsigned int	ft_strlcat(char *restrict dst, const char *restrict src, size_t dstsize);
+static int		ft_strlen(char const *str);
+
+unsigned int	ft_strlcat(char *restrict dst, const char *restrict src, size_t dstsize)
 {
 	int	dest_lenght;
 	int	src_length;
@@ -40,7 +41,7 @@ unsigned int	ft_strlcat(char * restrict dst, const char * restrict src, size_t d
 		return (dest_lenght + src_length);
 }
 
-int	ft_strlen(char *str)
+static int	ft_strlen(char const *str)
 {
 	int	index;
 

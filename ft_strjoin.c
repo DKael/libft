@@ -12,7 +12,7 @@
 #include <stdlib.h>
 
 char	*ft_strjoin(char const *s1, char const *s2);
-int		ft_strlen_join(char *str);
+int		ft_strlen_join(char const *str);
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -36,7 +36,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (result);
 }
 
-int	ft_strlen_join(char *str)
+int	ft_strlen_join(char const *str)
 {
 	int		index;
 

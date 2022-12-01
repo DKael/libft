@@ -15,7 +15,6 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	size_t	idx;
 	size_t	haystack_idx;
 	size_t	needle_idx;
 

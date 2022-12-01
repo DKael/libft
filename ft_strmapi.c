@@ -9,6 +9,8 @@
 /*   Updated: 2022/11/28 16:10:09 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <stdlib.h>
+
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))

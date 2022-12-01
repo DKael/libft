@@ -18,7 +18,7 @@ int	ft_lstsize(t_list *lst)
 	int		length;
 	t_list	*node_ptr;
 
-	if(lst == 0)
+	if (lst == 0)
 	{
 		return (0);
 	}

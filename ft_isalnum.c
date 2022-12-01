@@ -9,12 +9,12 @@
 /*   Updated: 2022/11/21 16:29:18 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-int ft_isalnum(int c);
+int	ft_isalnum(int c);
 
-int ft_isalnum(int c)
+int	ft_isalnum(int c)
 {
-	if (!(('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z') 
-		|| ('0' <= c && c <= '9')))
+	if (!(('A' <= c && c <= 'Z') || ('a' <= c && c <= 'z')
+			|| ('0' <= c && c <= '9')))
 		return (0);
 	return (1);
 }
