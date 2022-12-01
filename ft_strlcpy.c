@@ -9,21 +9,22 @@
 /*   Updated: 2022/11/21 16:30:44 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <stddef.h>
 
-unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
+size_t	ft_strlcpy(char *restrict dst, const char *restrict src, size_t dstsize)
 {
-	unsigned int	index;
-	unsigned int	index1;
+	size_t	index;
+	size_t	index1;
 
 	index = 0;
 	index1 = 0;
 	while (src[index] != '\0')
 		index++;
-	if (index >= size)
+	if (index >= dstsize)
 	{
-		while (index1 + 1 < size)
+		while (index1 + 1 < dstsize)
 		{
-			dest[index1] = src[index1];
+			dst[index1] = src[index1];
 			index1++;
 		}
 	}
@@ -31,10 +32,10 @@ unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
 	{
 		while (src[index1] != '\0')
 		{
-			dest[index1] = src[index1];
+			dst[index1] = src[index1];
 			index1++;
 		}
 	}
-	dest[index1] = '\0';
+	dst[index1] = '\0';
 	return (index);
 }

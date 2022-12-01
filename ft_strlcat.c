@@ -11,16 +11,15 @@
 /* ************************************************************************** */
 #include <stddef.h>
 
-unsigned int	ft_strlcat(char *restrict dst, const char *restrict src, size_t dstsize);
-static int		ft_strlen(char const *str);
+static size_t	strlen(const char *s);
 
-unsigned int	ft_strlcat(char *restrict dst, const char *restrict src, size_t dstsize)
+size_t	ft_strlcat(char *restrict dst, const char *restrict src, size_t dstsize)
 {
-	int	dest_lenght;
-	int	src_length;
-	int	src_index;
-	int	remain_size;
-	int	signed_size;
+	size_t	dest_lenght;
+	size_t	src_length;
+	size_t	src_index;
+	size_t	remain_size;
+	int		signed_size;
 
 	signed_size = (int)dstsize;
 	dest_lenght = ft_strlen(dst);
@@ -41,12 +40,14 @@ unsigned int	ft_strlcat(char *restrict dst, const char *restrict src, size_t dst
 		return (dest_lenght + src_length);
 }
 
-static int	ft_strlen(char const *str)
+static size_t	strlen(const char *s)
 {
-	int	index;
+	size_t	index;
 
 	index = 0;
-	while (str[index] != '\0')
+	while (s[index] != '\0')
+	{
 		index++;
+	}
 	return (index);
 }

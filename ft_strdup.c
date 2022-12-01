@@ -9,16 +9,16 @@
 /*   Updated: 2022/11/21 16:32:44 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+#include <stddef.h>
 #include <stdlib.h>
 
-char	*ft_strdup(char *src);
-int		ft_strlen(char *str);
-char	*ft_strcpy(char *dest, char *src);
+char			*ft_strdup(char *src);
+static size_t	ft_strlen(const char *s);
+static char		*ft_strcpy(char *restrict dst, const char *restrict src);
 
 char	*ft_strdup(char *src)
 {
-	int		src_length;
+	size_t	src_length;
 	char	*replica;
 
 	src_length = ft_strlen(src);
@@ -29,28 +29,28 @@ char	*ft_strdup(char *src)
 	return (replica);
 }
 
-int	ft_strlen(char *str)
+static size_t	ft_strlen(const char *s)
 {
-	int		index;
+	size_t	index;
 
 	index = 0;
-	while (str[index] != '\0')
+	while (s[index] != '\0')
 	{
 		index++;
 	}
 	return (index);
 }
 
-char	*ft_strcpy(char *dest, char *src)
+static char	*ft_strcpy(char *restrict dst, const char *restrict src)
 {
-	int	index;
+	size_t	index;
 
 	index = 0;
 	while (src[index] != '\0')
 	{
-		dest[index] = src[index];
+		dst[index] = src[index];
 		index++;
 	}
-	dest[index] = '\0';
-	return (dest);
+	dst[index] = '\0';
+	return (dst);
 }

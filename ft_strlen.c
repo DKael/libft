@@ -9,14 +9,16 @@
 /*   Updated: 2022/11/21 16:29:54 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-int	ft_strlen(char *str);
+#include <stddef.h>
 
-int	ft_strlen(char *str)
+size_t	ft_strlen(const char *s);
+
+size_t	ft_strlen(const char *s)
 {
-	int		index;
+	size_t	index;
 
 	index = 0;
-	while (str[index] != '\0')
+	while (s[index] != '\0')
 	{
 		index++;
 	}
