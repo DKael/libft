@@ -12,7 +12,6 @@
 #include <stddef.h>
 #include <stdlib.h>
 
-char			*ft_strdup(char *src);
 static size_t	ft_strlen(const char *s);
 static char		*ft_strcpy(char *restrict dst, const char *restrict src);
 

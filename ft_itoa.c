@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 #include <stdlib.h>
 
-char		*ft_itoa(int n);
 static char	*case_zero(void);
 static char	*case_pos(int n, int digit);
 static char	*case_neg(int n, int digit);

@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
+#include <stddef.h>
 
-char	*ft_strjoin(char const *s1, char const *s2);
-int		ft_strlen_join(char const *str);
+static size_t	ft_strlen(const char *s);
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -36,12 +36,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (result);
 }
 
-int	ft_strlen_join(char const *str)
+static size_t	ft_strlen(const char *s)
 {
-	int		index;
+	size_t	index;
 
 	index = 0;
-	while (str[index] != '\0')
+	while (s[index] != '\0')
 	{
 		index++;
 	}

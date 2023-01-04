@@ -9,8 +9,6 @@
 /*   Updated: 2022/11/21 16:31:33 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-char	*ft_strrchr(const char *s, int c);
-
 char	*ft_strrchr(const char *s, int c)
 {
 	int		index;

@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 #include <stddef.h>
 
-void	*ft_memmove(void *dst, const void *src, size_t len);
-
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	size_t	index;

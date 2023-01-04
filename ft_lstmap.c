@@ -12,6 +12,31 @@
 #include <stdlib.h>
 #include "libft.h"
 
+static t_list	*free_node(t_list **lst, void (*del)(void *));
+static t_list	*do_map(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+{
+	t_list	*delete;
+	t_list	*new_temp;
+
+	if (lst != 0)
+	{
+		new_temp = (t_list *)f((void *) lst);
+		if (new_temp == 0)
+			return (0);
+		new_temp->next = lst->next;
+		delete = lst;
+		lst = new_temp;
+		del(delete->content);
+		free(delete);
+		if (lst->next != 0)
+			return (do_map(lst, f, del));
+		return (lst);
+	}
+	return (0);
+}
+
 static t_list	*free_node(t_list **lst, void (*del)(void *))
 {
 	t_list	*delete;
@@ -53,26 +78,4 @@ static t_list	*do_map(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		free(delete);
 	}
 	return (lst);
-}
-
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
-{
-	t_list	*delete;
-	t_list	*new_temp;
-
-	if (lst != 0)
-	{
-		new_temp = (t_list *)f((void *) lst);
-		if (new_temp == 0)
-			return (0);
-		new_temp->next = lst->next;
-		delete = lst;
-		lst = new_temp;
-		del(delete->content);
-		free(delete);
-		if (lst->next != 0)
-			return (do_map(lst, f, del));
-		return (lst);
-	}
-	return (0);
 }

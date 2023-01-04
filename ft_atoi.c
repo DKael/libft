@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 #include <limits.h>
 
-int	ft_atoi(const char *str);
-
 int	ft_atoi(const char *str)
 {
 	int			idx;

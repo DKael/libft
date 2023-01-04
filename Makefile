@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: hyungdki <hyungdki@student.42seoul.>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/12/28 13:30:01 by hyungdki          #+#    #+#              #
+#    Updated: 2022/12/28 13:30:02 by hyungdki         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
@@ -39,15 +51,15 @@ SRCS =	ft_atoi.c \
 
 OBJS = 	${SRCS:.c=.o}
 
-SRCS_BONUS =	ft_lstadd_back_bonus.c \
-				ft_lstadd_front_bonus.c \
-				ft_lstclear_bonus.c \
-				ft_lstdelone_bonus.c \
-				ft_lstiter_bonus.c \
-				ft_lstlast_bonus.c \
-				ft_lstmap_bonus.c \
-				ft_lstnew_bonus.c \
-				ft_lstsize_bonus.c
+SRCS_BONUS =	ft_lstadd_back.c \
+				ft_lstadd_front.c \
+				ft_lstclear.c \
+				ft_lstdelone.c \
+				ft_lstiter.c \
+				ft_lstlast.c \
+				ft_lstmap.c \
+				ft_lstnew.c \
+				ft_lstsize.c
 
 OBJS_BONUS = 	${SRCS_BONUS:.c=.o}
 
@@ -60,22 +72,27 @@ else
 endif
 
 ${NAME} : ${TOTAL_OBJS}
-		ar rsc ${NAME} ${OBJS}
+		ar -rsc ${NAME} ${TOTAL_OBJS}
 
 %.o :%.c
 	${CC} ${CFLAGS} -c -I. $< -o $@
 
 all : ${NAME}
+	sleep 1
 
 clean:
 	rm -f $(OBJS) $(OBJS_BONUS)
 
-fclean: clean
+fclean: 
+	@$(MAKE) clean
 	rm -f  ${NAME}
 
-re: fclean all
+re: 
+	@$(MAKE) fclean
+	@$(MAKE) all
 
 bonus:
-	make WITH_BONUS=1
+	sleep 1
+	@make WITH_BONUS=1
 
-.PHONY: libft.a all clean fclean re bonus
+.PHONY: all clean fclean re bonus

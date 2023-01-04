@@ -11,31 +11,26 @@
 /* ************************************************************************** */
 #include <stddef.h>
 
-size_t	ft_strlcpy(char *restrict dst, const char *restrict src, size_t dstsize)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dsize)
 {
 	size_t	index;
 	size_t	index1;
 
 	index = 0;
-	index1 = 0;
+	index1 = -1;
 	while (src[index] != '\0')
 		index++;
-	if (index >= dstsize)
+	if (index >= dsize)
 	{
-		while (index1 + 1 < dstsize)
-		{
+		while (++index1 + 1 < dsize)
 			dst[index1] = src[index1];
-			index1++;
-		}
 	}
 	else
 	{
-		while (src[index1] != '\0')
-		{
+		while (src[++index1] != '\0')
 			dst[index1] = src[index1];
-			index1++;
-		}
 	}
-	dst[index1] = '\0';
+	if (dsize != 0)
+		dst[index1] = '\0';
 	return (index);
 }

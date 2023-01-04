@@ -11,9 +11,8 @@
 /* ************************************************************************** */
 #include <unistd.h>
 
-void	ft_putnbr_fd(int n, int fd);
-void	case_pos(int n, int digit, int fd);
-void	case_neg(int n, int digit, int fd);
+static void	case_pos(int n, int digit, int fd);
+static void	case_neg(int n, int digit, int fd);
 
 void	ft_putnbr_fd(int n, int fd)
 {
@@ -35,7 +34,7 @@ void	ft_putnbr_fd(int n, int fd)
 		case_neg(n, digit, fd);
 }
 
-void	case_pos(int n, int digit, int fd)
+static void	case_pos(int n, int digit, int fd)
 {
 	char	result[20];
 
@@ -47,7 +46,7 @@ void	case_pos(int n, int digit, int fd)
 	write(fd, result, sizeof(char) * digit);
 }
 
-void	case_neg(int n, int digit, int fd)
+static void	case_neg(int n, int digit, int fd)
 {
 	char	result[20];
 

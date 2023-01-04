@@ -11,10 +11,9 @@
 /* ************************************************************************** */
 #include <stdlib.h>
 
-char	**ft_split(char const *s, char c);
-char	**do_split(char const *s, char c, char **result);
-char	*ft_strndup(char const *src, int size);
-void	init_value(int *index, int *flag, int *count);
+static char	**do_split(char const *s, char c, char **result);
+static char	*ft_strndup(char const *src, int size);
+static void	init_value(int *index, int *flag, int *count);
 
 char	**ft_split(char const *s, char c)
 {
@@ -44,7 +43,7 @@ char	**ft_split(char const *s, char c)
 	return ((do_split(s, c, result)) - split_count);
 }
 
-char	**do_split(char const *s, char c, char **result)
+static char	**do_split(char const *s, char c, char **result)
 {
 	int	index;
 	int	flag;
@@ -71,7 +70,7 @@ char	**do_split(char const *s, char c, char **result)
 	return (result);
 }
 
-char	*ft_strndup(char const *src, int size)
+static char	*ft_strndup(char const *src, int size)
 {
 	int		src_length;
 	char	*replica;
@@ -98,7 +97,7 @@ char	*ft_strndup(char const *src, int size)
 	return (replica);
 }
 
-void	init_value(int *index, int *flag, int *count)
+static void	init_value(int *index, int *flag, int *count)
 {
 	*index = -1;
 	*flag = 0;

@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungdki <hyungdki@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/28 20:03:37 by hyungdki          #+#    #+#             */
-/*   Updated: 2022/11/28 20:03:38 by hyungdki         ###   ########.fr       */
+/*   Created: 2022/11/28 19:45:42 by hyungdki          #+#    #+#             */
+/*   Updated: 2022/11/28 19:45:43 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-t_list	*ft_lstlast(t_list *lst);
-
-t_list	*ft_lstlast(t_list *lst)
+int	ft_lstsize(t_list *lst)
 {
+	int		length;
+	t_list	*node_ptr;
+
 	if (lst == 0)
+	{
 		return (0);
-	while (lst->next != 0)
-		lst = lst->next;
-	return (lst);
+	}
+	length = 1;
+	node_ptr = lst;
+	while (node_ptr->next != 0)
+	{
+		length++;
+		node_ptr = node_ptr->next;
+	}
+	return (length);
 }

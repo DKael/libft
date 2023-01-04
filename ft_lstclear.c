@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyungdki <hyungdki@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/28 19:45:42 by hyungdki          #+#    #+#             */
-/*   Updated: 2022/11/28 19:45:43 by hyungdki         ###   ########.fr       */
+/*   Created: 2022/11/28 20:56:52 by hyungdki          #+#    #+#             */
+/*   Updated: 2022/11/28 20:56:53 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <stdlib.h>
 #include "libft.h"
 
-int	ft_lstsize(t_list *lst);
-
-int	ft_lstsize(t_list *lst)
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	int		length;
-	t_list	*node_ptr;
+	t_list	*delete;
+	t_list	*next_node;
 
-	if (lst == 0)
+	if ((*lst) != 0)
 	{
-		return (0);
+		next_node = (*lst);
+		while (next_node->next != 0)
+		{
+			delete = next_node;
+			next_node = next_node->next;
+			del(delete->content);
+			free(delete);
+		}
+		free(next_node);
 	}
-	length = 1;
-	node_ptr = lst;
-	while (node_ptr->next != 0)
-	{
-		length++;
-		node_ptr = node_ptr->next;
-	}
-	return (length);
 }

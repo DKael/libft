@@ -13,7 +13,7 @@
 
 static size_t	ft_strlen(const char *s);
 
-size_t	ft_strlcat(char *restrict dst, const char *restrict src, size_t dstsize)
+size_t	ft_strlcat(char *dst, const char *src, size_t dsize)
 {
 	size_t	dest_lenght;
 	size_t	src_length;
@@ -21,7 +21,7 @@ size_t	ft_strlcat(char *restrict dst, const char *restrict src, size_t dstsize)
 	size_t	remain_size;
 	int		signed_size;
 
-	signed_size = (int)dstsize;
+	signed_size = (int)dsize;
 	dest_lenght = ft_strlen(dst);
 	src_length = ft_strlen(src);
 	if (signed_size < 0)
