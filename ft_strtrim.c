@@ -10,68 +10,80 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
+#include <stddef.h>
 
-static char	*do_trim(char const *s1, char const *set, char *result);
-static int	ft_strlen_trim(char const *str);
+static int		check_in_set(char c, char const *set);
+static char		*do_trim(char const *s1, size_t front, size_t back);
+static size_t	ft_strlen(const char *s);
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	int		index_s1;
-	int		index_set;
-	int		rm_count;
+	size_t	s1_len;
+	size_t	front;
+	size_t	back;
 	char	*result;
 
-	index_set = -1;
-	rm_count = 0;
-	while (set[++index_set] != '\0')
+	s1_len = ft_strlen(s1);
+	front = 0;
+	while (check_in_set(s1[front], set) && s1[front] != '\0')
+		front++;
+	if (s1[front] == '\0')
 	{
-		index_s1 = -1;
-		while (s1[++index_s1] != '\0')
-		{
-			if (s1[index_s1] == set[index_set])
-				rm_count++;
-		}
+		result = (char *)malloc(sizeof(char) * 1);
+		if (result == 0)
+			return (0);
+		result[0] = '\0';
+		return (result);
 	}
-	result = (char *)malloc(sizeof(char) * (ft_strlen_trim(s1) - rm_count + 1));
-	if (result == 0)
-		return (0);
-	return (do_trim(s1, set, result));
+	else
+	{
+		back = s1_len - 1;
+		while (check_in_set(s1[back], set))
+			back--;
+		return (do_trim(s1, front, back));
+	}
 }
 
-static char	*do_trim(char const *s1, char const *set, char *result)
+static char	*do_trim(char const *s1, size_t front, size_t back)
 {
-	int		index_s1;
-	int		index_set;
-	int		index_r;
-	int		flag;
+	char	*result;
+	size_t	len;
+	size_t	idx;
 
-	index_r = 0;
-	index_s1 = -1;
-	while (s1[++index_s1] != '\0')
+	len = back - front + 1;
+	result = (char *)malloc(sizeof(char) * (len + 1));
+	if (result == 0)
+		return (0);
+	idx = 0;
+	while (idx < len)
 	{
-		flag = 1;
-		index_set = -1;
-		while (set[++index_set] != '\0')
-		{
-			if (s1[index_s1] == set[index_set])
-			{
-				flag = 0;
-				break ;
-			}
-		}
-		if (flag == 1)
-			result[index_r++] = s1[index_s1];
+		result[idx] = s1[front + idx];
+		idx++;
 	}
-	result[index_r] = '\0';
+	result[idx] = '\0';
 	return (result);
 }
 
-static int	ft_strlen_trim(char const *str)
+static int	check_in_set(char c, char const *set)
 {
-	int		index;
+	int	idx;
+
+	idx = 0;
+	while (set[idx] != '\0')
+	{
+		if (set[idx] == c)
+			return (1);
+		idx++;
+	}
+	return (0);
+}
+
+static size_t	ft_strlen(const char *s)
+{
+	size_t	index;
 
 	index = 0;
-	while (str[index] != '\0')
+	while (s[index] != '\0')
 	{
 		index++;
 	}

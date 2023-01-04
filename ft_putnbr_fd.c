@@ -37,23 +37,28 @@ void	ft_putnbr_fd(int n, int fd)
 static void	case_pos(int n, int digit, int fd)
 {
 	char	result[20];
+	int		save_digit;
 
+	save_digit = digit;
 	while (n != 0)
 	{
-		result[digit--] = (n % 10) + '0';
+		result[--digit] = (n % 10) + '0';
 		n /= 10;
 	}
-	write(fd, result, sizeof(char) * digit);
+	write(fd, result, sizeof(char) * save_digit);
 }
 
 static void	case_neg(int n, int digit, int fd)
 {
 	char	result[20];
+	int		save_digit;
 
+	save_digit = digit;
 	while (n != 0)
 	{
-		result[digit--] = (-1) * (n % 10) + '0';
+		result[digit--] = ((-1) * (n % 10)) + '0';
 		n /= 10;
 	}
-	write(fd, result, sizeof(char) * (digit + 1));
+	result[digit] = '-';
+	write(fd, result, sizeof(char) * (save_digit + 1));
 }

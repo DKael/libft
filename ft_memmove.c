@@ -20,15 +20,18 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	index = -1;
 	dst_cptr = (char *)dst;
 	src_cptr = (char *)src;
-	if ((long)src - (long)dst > 0)
+	if (dst != 0 || src != 0)
 	{
-		while (++index < len)
-			dst_cptr[index] = src_cptr[index];
-	}
-	else
-	{
-		while (++index < len)
-			dst_cptr[len - index - 1] = src_cptr[len - index - 1];
+		if ((long)src - (long)dst > 0)
+		{
+			while (++index < len)
+				dst_cptr[index] = src_cptr[index];
+		}
+		else
+		{
+			while (++index < len)
+				dst_cptr[len - index - 1] = src_cptr[len - index - 1];
+		}
 	}
 	return (dst);
 }

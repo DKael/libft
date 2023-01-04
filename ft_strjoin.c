@@ -21,8 +21,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		index;
 	char	*result;
 
-	s1_size = ft_strlen_join(s1);
-	s2_size = ft_strlen_join(s2);
+	s1_size = ft_strlen(s1);
+	s2_size = ft_strlen(s2);
 	result = (char *)malloc(sizeof(char) * (s1_size + s2_size + 1));
 	if (result == 0)
 		return (0);

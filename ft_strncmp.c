@@ -24,6 +24,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	{
 		if (p1[index] != p2[index])
 			return ((int)(p1[index] - p2[index]));
+		else if (p1[index] == '\0')
+			return (0);
 		index++;
 	}
 	return (0);

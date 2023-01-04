@@ -20,7 +20,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void*))
 	if ((*lst) != 0)
 	{
 		next_node = (*lst);
-		while (next_node->next != 0)
+		while (next_node != 0)
 		{
 			delete = next_node;
 			next_node = next_node->next;
@@ -28,5 +28,6 @@ void	ft_lstclear(t_list **lst, void (*del)(void*))
 			free(delete);
 		}
 		free(next_node);
+		*lst = 0;
 	}
 }

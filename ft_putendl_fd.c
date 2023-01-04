@@ -19,5 +19,5 @@ void	ft_putendl_fd(char *s, int fd)
 	while (s[index] != '\0')
 		index++;
 	write(fd, s, sizeof(char) * index);
-	write(fd, "\0", sizeof(char));
+	write(fd, "\n", sizeof(char));
 }
