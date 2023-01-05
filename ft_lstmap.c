@@ -12,55 +12,50 @@
 #include <stdlib.h>
 #include "libft.h"
 
-static t_list	*do_map(t_list *lst, void *(*f)(void *), void (*del)(void *));
-static t_list	*free_node(t_list **lst, void (*del)(void *));
+static t_list	*ft_lstnew1(void *content);
+static void		ft_lstclear1(t_list **lst, void (*del)(void*));
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*delete;
-	t_list	*new_temp;
+	t_list	*new_lst;
+	t_list	*new_iter;
 
 	if (lst != 0)
 	{
-		new_temp = (t_list *)f((void *) lst);
-		if (new_temp == 0)
+		new_lst = ft_lstnew1(f(lst->content));
+		if (new_lst == 0)
 			return (0);
-		new_temp->next = lst->next;
-		delete = lst;
-		lst = new_temp;
-		del(delete->content);
-		free(delete);
-		if (lst->next != 0)
-			return (do_map(lst, f, del));
-		return (lst);
+		new_iter = new_lst;
+		lst = lst->next;
+		while (lst != 0)
+		{
+			new_iter->next = ft_lstnew1(f(lst->content));
+			if (new_iter->next == 0)
+			{
+				ft_lstclear1(&new_lst, del);
+				return (0);
+			}
+			new_iter = new_iter->next;
+			lst = lst->next;
+		}
+		return (new_lst);
 	}
 	return (0);
 }
 
-static t_list	*do_map(t_list *lst, void *(*f)(void *), void (*del)(void *))
+static t_list	*ft_lstnew1(void *content)
 {
-	t_list	*ptr_node;
-	t_list	*delete;
-	t_list	*new_temp;
+	t_list	*result;
 
-	ptr_node = lst;
-	while (ptr_node->next != 0)
-	{
-		new_temp = (t_list *)f((void *)(ptr_node->next));
-		if (new_temp == 0)
-			return (free_node(&lst, del));
-		delete = ptr_node->next;
-		new_temp->next = ptr_node->next->next;
-		ptr_node->next = new_temp;
-		ptr_node = ptr_node->next;
-		delete = ptr_node;
-		del(delete->content);
-		free(delete);
-	}
-	return (lst);
+	result = (t_list *)malloc(sizeof(t_list));
+	if (result == 0)
+		return (0);
+	result->content = content;
+	result->next = 0;
+	return (result);
 }
 
-static t_list	*free_node(t_list **lst, void (*del)(void *))
+static void	ft_lstclear1(t_list **lst, void (*del)(void*))
 {
 	t_list	*delete;
 	t_list	*next_node;
@@ -68,7 +63,7 @@ static t_list	*free_node(t_list **lst, void (*del)(void *))
 	if ((*lst) != 0)
 	{
 		next_node = (*lst);
-		while (next_node->next != 0)
+		while (next_node != 0)
 		{
 			delete = next_node;
 			next_node = next_node->next;
@@ -76,6 +71,6 @@ static t_list	*free_node(t_list **lst, void (*del)(void *))
 			free(delete);
 		}
 		free(next_node);
+		*lst = 0;
 	}
-	return (0);
 }
