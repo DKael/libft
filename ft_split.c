@@ -11,28 +11,29 @@
 /* ************************************************************************** */
 #include <stdlib.h>
 
-static char	**do_split(char const *s, char c, char **result);
+static char	**do_split(char const *s, char c, char **result, int *result_index);
 static char	*ft_strndup(char const *src, int size);
-static void	init_value(int *index, int *flag, int *count);
+static void	init_value(int *index, int *count, int *etc);
+static char	**do_remove(char **result, int result_index);
 
 char	**ft_split(char const *s, char c)
 {
 	int		index;
-	int		flag;
+	int		count;
 	int		split_count;
 	char	**result;
 
-	init_value(&index, &flag, &split_count);
+	init_value(&index, &count, &split_count);
 	while (s[++index] != '\0')
 	{
 		if (s[index] != c)
 		{
-			flag = 1;
+			count++;
 		}	
-		else if (flag == 1)
+		else if (count != 0)
 		{
 			split_count++;
-				flag = 0;
+			count = 0;
 		}
 	}
 	if (index != 0 && s[index - 1] != c)
@@ -40,34 +41,48 @@ char	**ft_split(char const *s, char c)
 	result = (char **)malloc(sizeof(char *) * (split_count + 1));
 	if (result == 0)
 		return (0);
-	return ((do_split(s, c, result)) - split_count);
+	result[split_count] = 0;
+	return (do_split(s, c, result, &split_count));
 }
 
-static char	**do_split(char const *s, char c, char **result)
+static char	**do_split(char const *s, char c, char **result, int *result_index)
 {
 	int	index;
-	int	flag;
 	int	count;
 
-	init_value(&index, &flag, &count);
+	init_value(&index, &count, result_index);
 	while (s[++index] != '\0')
 	{
 		if (s[index] != c)
 		{
-			flag = 1;
 			count++;
 		}
-		else if (flag == 1)
+		else if (count != 0)
 		{
-			*result++ = ft_strndup(&s[index - count], count);
-			flag = 0;
+			result[*result_index] = ft_strndup(&s[index - count], count);
+			if (result[*result_index++] == 0)
+				return (do_remove(result, *result_index - 1));
 			count = 0;
 		}
 	}
 	if (index != 0 && s[index - 1] != c)
-		*result++ = ft_strndup(&s[index - count], count);
-	*result = 0;
+	{
+		result[*result_index] = ft_strndup(&s[index - count], count);
+		if (result[*result_index++] == 0)
+			return (do_remove(result, *result_index - 1));
+	}
 	return (result);
+}
+
+static char	**do_remove(char **result, int result_index)
+{
+	int	index;
+
+	index = 0;
+	while (index < result_index)
+		free(result[index]);
+	free(result);
+	return ((char **)0);
 }
 
 static char	*ft_strndup(char const *src, int size)
@@ -97,9 +112,9 @@ static char	*ft_strndup(char const *src, int size)
 	return (replica);
 }
 
-static void	init_value(int *index, int *flag, int *count)
+static void	init_value(int *index, int *count, int *etc)
 {
 	*index = -1;
-	*flag = 0;
 	*count = 0;
+	*etc = 0;
 }
