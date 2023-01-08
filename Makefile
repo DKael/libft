@@ -78,7 +78,6 @@ ${NAME} : ${TOTAL_OBJS}
 	${CC} ${CFLAGS} -c -I. $< -o $@
 
 all : ${NAME}
-	sleep 1
 
 clean:
 	rm -f $(OBJS) $(OBJS_BONUS)
@@ -92,7 +91,6 @@ re:
 	@$(MAKE) all
 
 bonus:
-	sleep 1
 	@make WITH_BONUS=1
 
 .PHONY: all clean fclean re bonus
