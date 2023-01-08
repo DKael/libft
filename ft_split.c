@@ -11,110 +11,111 @@
 /* ************************************************************************** */
 #include <stdlib.h>
 
-static char	**do_split(char const *s, char c, char **result, int *result_index);
-static char	*ft_strndup(char const *src, int size);
-static void	init_value(int *index, int *count, int *etc);
-static char	**do_remove(char **result, int result_index);
+static int		do_split(char ***result1, char *temp, int len);
+static int		do_remove(char ***result2, int result_idx, char *temp);
+static char		*ft_strdup(char *src);
+static char		*ft_strcpy(char *dst, const char *src);
 
 char	**ft_split(char const *s, char c)
 {
-	int		index;
-	int		count;
-	int		split_count;
+	char	*temp;
 	char	**result;
+	int		idx;
+	int		count;
 
-	init_value(&index, &count, &split_count);
-	while (s[++index] != '\0')
-	{
-		if (s[index] != c)
-		{
-			count++;
-		}	
-		else if (count != 0)
-		{
-			split_count++;
-			count = 0;
-		}
-	}
-	if (index != 0 && s[index - 1] != c)
-		split_count++;
-	result = (char **)malloc(sizeof(char *) * (split_count + 1));
-	if (result == 0)
+	temp = ft_strdup((char *)s);
+	if (temp == 0)
 		return (0);
-	result[split_count] = 0;
-	return (do_split(s, c, result, &split_count));
-}
-
-static char	**do_split(char const *s, char c, char **result, int *result_index)
-{
-	int	index;
-	int	count;
-
-	init_value(&index, &count, result_index);
-	while (s[++index] != '\0')
+	idx = -1;
+	count = 0;
+	while (temp[++idx] != '\0')
 	{
-		if (s[index] != c)
-		{
+		if (temp[idx] != c && (temp[idx + 1] == c || temp[idx + 1] == '\0'))
 			count++;
-		}
-		else if (count != 0)
-		{
-			result[*result_index] = ft_strndup(&s[index - count], count);
-			if (result[*result_index++] == 0)
-				return (do_remove(result, *result_index - 1));
-			count = 0;
-		}
+		if (temp[idx] == c)
+			temp[idx] = '\0';
 	}
-	if (index != 0 && s[index - 1] != c)
+	result = (char **)malloc(sizeof(char *) * (count + 1));
+	if (result == 0)
 	{
-		result[*result_index] = ft_strndup(&s[index - count], count);
-		if (result[*result_index++] == 0)
-			return (do_remove(result, *result_index - 1));
+		free(temp);
+		return (0);
 	}
+	do_split(&result, temp, idx);
 	return (result);
 }
 
-static char	**do_remove(char **result, int result_index)
+static int	do_split(char ***result1, char *temp, int len)
+{
+	int		idx;
+	int		result_idx;
+
+	idx = 0;
+	result_idx = 0;
+	if (temp[idx] != '\0')
+	{
+		(*result1)[result_idx] = ft_strdup(temp);
+		if ((*result1)[result_idx] == 0)
+			return (do_remove(result1, result_idx, temp));
+		result_idx++;
+	}
+	while (++idx < len)
+	{
+		if (temp[idx] != '\0' && temp[idx - 1] == '\0')
+		{
+			(*result1)[result_idx] = ft_strdup(&temp[idx]);
+			if ((*result1)[result_idx] == 0)
+				return (do_remove(result1, result_idx, temp));
+			result_idx++;
+		}
+	}
+	(*result1)[result_idx] = 0;
+	free(temp);
+	return (0);
+}
+
+static int	do_remove(char ***result2, int result_idx, char *temp)
 {
 	int	index;
 
 	index = 0;
-	while (index < result_index)
-		free(result[index]);
-	free(result);
-	return ((char **)0);
+	while (index < result_idx)
+	{
+		free((*result2)[index]);
+		index++;
+	}
+	free(*result2);
+	(*result2) = 0;
+	free(temp);
+	return (0);
 }
 
-static char	*ft_strndup(char const *src, int size)
+static char	*ft_strdup(char *src)
 {
 	int		src_length;
 	char	*replica;
-	int		index;
 
 	src_length = 0;
 	while (src[src_length] != '\0')
 	{
 		src_length++;
 	}
-	if (src_length >= size)
-		replica = (char *)malloc(sizeof(char) * (size + 1));
-	else
-		replica = (char *)malloc(sizeof(char) * (src_length + 1));
+	replica = (char *)malloc(sizeof(char) * (src_length + 1));
 	if (replica == 0)
 		return (0);
-	index = 0;
-	while (src[index] != '\0' && index < size)
-	{
-		replica[index] = src[index];
-		index++;
-	}
-	replica[index] = '\0';
-	return (replica);
+	return (ft_strcpy(replica, src));
 }
 
-static void	init_value(int *index, int *count, int *etc)
+static char	*ft_strcpy(char *dst, const char *src)
 {
-	*index = -1;
-	*count = 0;
-	*etc = 0;
+	int		index;
+
+	index = 0;
+	while (src[index] != '\0')
+	{
+		dst[index] = src[index];
+		index++;
+	}
+	dst[index] = '\0';
+	return (dst);
 }

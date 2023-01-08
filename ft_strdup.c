@@ -13,7 +13,7 @@
 #include <stdlib.h>
 
 static size_t	ft_strlen(const char *s);
-static char		*ft_strcpy(char *restrict dst, const char *restrict src);
+static char		*ft_strcpy(char *dst, const char *src);
 
 char	*ft_strdup(char *src)
 {
@@ -40,7 +40,7 @@ static size_t	ft_strlen(const char *s)
 	return (index);
 }
 
-static char	*ft_strcpy(char *restrict dst, const char *restrict src)
+static char	*ft_strcpy(char *dst, const char *src)
 {
 	size_t	index;
 
