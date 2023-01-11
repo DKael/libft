@@ -13,18 +13,16 @@
 #include "libft.h"
 
 static t_list	*m(t_list *l, t_list *n, void *(*f)(void *), void (*d)(void *));
-static t_list	*ft_lstnew1(void *content);
-static void		ft_lstclear1(t_list **lst, void (*del)(void*));
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*new_lst;
 	void	*f_content;
 
-	if (lst != 0)
+	if (lst != NULL && *f != NULL && *del != NULL)
 	{
 		f_content = f(lst->content);
-		new_lst = ft_lstnew1(f_content);
+		new_lst = ft_lstnew(f_content);
 		if (new_lst == 0)
 		{
 			del(f_content);
@@ -45,47 +43,15 @@ static t_list	*m(t_list *l, t_list *n, void *(*f)(void *), void (*d)(void *))
 	while (l != 0)
 	{
 		f_content = f(l->content);
-		new_iter->next = ft_lstnew1(f_content);
+		new_iter->next = ft_lstnew(f_content);
 		if (new_iter->next == 0)
 		{
 			d(f_content);
-			ft_lstclear1(&n, d);
+			ft_lstclear(&n, d);
 			return (0);
 		}
 		new_iter = new_iter->next;
 		l = l->next;
 	}
 	return (n);
-}
-
-static t_list	*ft_lstnew1(void *content)
-{
-	t_list	*result;
-
-	result = (t_list *)malloc(sizeof(t_list));
-	if (result == 0)
-		return (0);
-	result->content = content;
-	result->next = 0;
-	return (result);
-}
-
-static void	ft_lstclear1(t_list **lst, void (*del)(void*))
-{
-	t_list	*delete;
-	t_list	*next_node;
-
-	if ((*lst) != 0)
-	{
-		next_node = (*lst);
-		while (next_node != 0)
-		{
-			delete = next_node;
-			next_node = next_node->next;
-			del(delete->content);
-			free(delete);
-		}
-		free(next_node);
-		*lst = 0;
-	}
 }

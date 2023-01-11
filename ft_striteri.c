@@ -13,7 +13,12 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
 	unsigned int	index;
 
-	index = -1;
-	while (s[++index] != '\0')
+	if (*f == (void *)0)
+		return ;
+	index = 0;
+	while (s[index] != '\0')
+	{
 		f(index, &s[index]);
+		index++;
+	}
 }

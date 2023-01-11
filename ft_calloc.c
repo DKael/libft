@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 #include <stddef.h>
 #include <stdlib.h>
+#include <limits.h>
 
 void	*ft_calloc(size_t count, size_t size)
 {
@@ -20,10 +21,14 @@ void	*ft_calloc(size_t count, size_t size)
 	char	*temp_ptr;
 
 	index = 0;
+	if (count == 0 || size == 0)
+		return (malloc(0));
 	total_size = count * size;
+	if (ULLONG_MAX / size < count)
+		return ((NULL));
 	result = malloc(total_size);
-	if (result == 0)
-		return (0);
+	if (result == NULL)
+		return (NULL);
 	temp_ptr = (char *)result;
 	while (index < total_size)
 	{
@@ -32,3 +37,14 @@ void	*ft_calloc(size_t count, size_t size)
 	}
 	return (result);
 }
+
+// #include <stdio.h>
+// int main()
+// {
+// 	long long* test = (long long*)ft_calloc(ULLONG_MAX/8  + 2,8);
+// 	for (long long i = 0; i < 20; i++)
+// 	{
+// 		test[i] = i;
+// 		printf("%lld ", test[i]);
+// 	}
+// }

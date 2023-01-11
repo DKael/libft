@@ -91,6 +91,7 @@ re:
 	@$(MAKE) all
 
 bonus:
+	sleep 1
 	@make WITH_BONUS=1
 
 .PHONY: all clean fclean re bonus
