@@ -13,16 +13,16 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t	index;
-	char	*dst_cptr;
-	char	*src_cptr;
+	size_t			index;
+	unsigned char	*dst_cptr;
+	unsigned char	*src_cptr;
 
 	index = -1;
-	dst_cptr = (char *)dst;
-	src_cptr = (char *)src;
-	if (dst != 0 || src != 0)
+	dst_cptr = (unsigned char *)dst;
+	src_cptr = (unsigned char *)src;
+	if (dst != NULL || src != NULL)
 	{
-		if ((long)src - (long)dst > 0)
+		if (src - dst > 0)
 		{
 			while (++index < len)
 				dst_cptr[index] = src_cptr[index];

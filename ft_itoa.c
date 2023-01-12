@@ -40,8 +40,8 @@ static char	*case_zero(void)
 	char	*result;
 
 	result = (char *)malloc(sizeof(char) * 2);
-	if (result == 0)
-		return (0);
+	if (result == NULL)
+		return (NULL);
 	result[0] = '0';
 	result[1] = '\0';
 	return (result);
@@ -52,8 +52,8 @@ static char	*case_pos(int n, int digit)
 	char	*result;
 
 	result = (char *)malloc(sizeof(char) * (digit + 1));
-	if (result == 0)
-		return (0);
+	if (result == NULL)
+		return (NULL);
 	result[digit--] = '\0';
 	while (n != 0)
 	{
@@ -68,8 +68,8 @@ static char	*case_neg(int n, int digit)
 	char	*result;
 
 	result = (char *)malloc(sizeof(char) * (digit + 2));
-	if (result == 0)
-		return (0);
+	if (result == NULL)
+		return (NULL);
 	result[0] = '-';
 	result[digit + 1] = '\0';
 	while (n != 0)

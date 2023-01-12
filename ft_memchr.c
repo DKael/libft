@@ -23,5 +23,5 @@ void	*ft_memchr(const void *s, int c, size_t n)
 		if (s_ucptr[index] == (unsigned char)c)
 			return ((void *)((size_t)s_ucptr + index));
 	}
-	return (0);
+	return (NULL);
 }

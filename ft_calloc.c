@@ -37,14 +37,3 @@ void	*ft_calloc(size_t count, size_t size)
 	}
 	return (result);
 }
-
-// #include <stdio.h>
-// int main()
-// {
-// 	long long* test = (long long*)ft_calloc(ULLONG_MAX/8  + 2,8);
-// 	for (long long i = 0; i < 20; i++)
-// 	{
-// 		test[i] = i;
-// 		printf("%lld ", test[i]);
-// 	}
-// }
