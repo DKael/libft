@@ -21,11 +21,14 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	while (s[len_s] != '\0')
 		len_s++;
 	result = (char *)malloc(sizeof(char) * (len_s + 1));
-	if (result == 0)
-		return (0);
-	index = -1;
-	while (s[++index] != '\0')
+	if (result == NULL)
+		return (NULL);
+	index = 0;
+	while (s[index] != '\0')
+	{
 		result[index] = f(index, s[index]);
+		index++;
+	}
 	result[index] = '\0';
 	return (result);
 }

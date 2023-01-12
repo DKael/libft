@@ -9,10 +9,8 @@
 /*   Updated: 2022/11/23 15:25:50 by hyungdki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stddef.h>
 #include <stdlib.h>
-
-static size_t	ft_strlen(const char *s);
+#include "libft.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -27,8 +25,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		result = (char *)malloc(sizeof(char) * (len + 1));
 	else
 		result = (char *)malloc(sizeof(char) * 1);
-	if (result == 0)
-		return (0);
+	if (result == NULL)
+		return (NULL);
 	idx = 0;
 	if (s_len > (size_t)start)
 	{
@@ -37,19 +35,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 			result[idx] = s[(size_t)start + idx];
 			idx++;
 		}
-	}	
+	}
 	result[idx] = '\0';
 	return (result);
-}
-
-static size_t	ft_strlen(const char *s)
-{
-	size_t	index;
-
-	index = 0;
-	while (s[index] != '\0')
-	{
-		index++;
-	}
-	return (index);
 }

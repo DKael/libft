@@ -10,11 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
-#include <stddef.h>
+#include "libft.h"
 
 static int		check_in_set(char c, char const *set);
 static char		*do_trim(char const *s1, size_t front, size_t back);
-static size_t	ft_strlen(const char *s);
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
@@ -30,8 +29,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (s1[front] == '\0')
 	{
 		result = (char *)malloc(sizeof(char) * 1);
-		if (result == 0)
-			return (0);
+		if (result == NULL)
+			return (NULL);
 		result[0] = '\0';
 		return (result);
 	}
@@ -52,8 +51,8 @@ static char	*do_trim(char const *s1, size_t front, size_t back)
 
 	len = back - front + 1;
 	result = (char *)malloc(sizeof(char) * (len + 1));
-	if (result == 0)
-		return (0);
+	if (result == NULL)
+		return (NULL);
 	idx = 0;
 	while (idx < len)
 	{
@@ -76,16 +75,4 @@ static int	check_in_set(char c, char const *set)
 		idx++;
 	}
 	return (0);
-}
-
-static size_t	ft_strlen(const char *s)
-{
-	size_t	index;
-
-	index = 0;
-	while (s[index] != '\0')
-	{
-		index++;
-	}
-	return (index);
 }
