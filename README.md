@@ -57,5 +57,6 @@ Libft는 C 표준 라이브러리(libc)의 핵심 함수들을 직접 구현하�
 
 ## 6. 기술 스택
 	•	언어: C
-	•	빌드 도구: GNU Make
-	•	개발 환경: Unix/Linux (터미널 기반)
+  	•	운영체제/환경: Unix/Linux
+ 	•	빌드 도구: GNU Make
+ 	•	Coding Conventions: Norminette
